@@ -2,9 +2,8 @@ const iconvLite = require('iconv-lite');
 const axios = require('axios');
 module.exports = {
   $request(path) {
-    let url = "https://www.qqxs.cc/"
-    path  ? url += path : url + ""
-    console.log(url);
+    let url = "https://www.qqxs.cc/";
+    path ? url += path : url + "";
     return new Promise((resulve, reject) => {
       axios({
         method: 'get',
@@ -23,19 +22,19 @@ module.exports = {
     let _stream = []
     let responseStream = await this.$request(path)
     let html = null
-    if(responseStream!==null){
-      html = await this.bufferString(_stream,responseStream)
+    if (responseStream !== null) {
+      html = await this.bufferString(_stream, responseStream)
       return html;
-    }else{
+    } else {
       return null
     }
   },
-  bufferString(_stream,responseStream){
-    return new Promise((resulve,reject)=>{
+  bufferString(_stream, responseStream) {
+    return new Promise((resulve, reject) => {
       responseStream.on('data', data => {
         _stream.push(data)
       })
-      responseStream.on('error',err=>{
+      responseStream.on('error', err => {
         reject(err)
       })
       responseStream.on('end', () => {
@@ -45,5 +44,5 @@ module.exports = {
         console.log('gbk_html转码成功')
       })
     })
-  }
-}
+  },
+};

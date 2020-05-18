@@ -1,11 +1,12 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const { join } = require('path');
-const passport = require('passport');
-const mongURI = require('./src/assets/config').mongoUri;
-const PORT_ = 9915;
-const app = express();
+const
+  express = require('express'),
+  mongoose = require('mongoose'),
+  bodyParser = require('body-parser'),
+  { join } = require('path'),
+  passport = require('passport'),
+  mongURI = require('./src/assets/config').mongoUri,
+  PORT_ = 9915,
+  app = express();
 mongoose
   .connect(mongURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => { console.log("database connect OK"); })
@@ -24,11 +25,14 @@ app.use('*', (req, res, next) => {  //设置跨域访问
   res.header("Content-Type", "text/html", "application/json;charset=utf-8");
   next();
 });
-/* blog router */
-app.use('/blog/user', require('./src/router/blog/user'));
-app.use('/blog/book', require('./src/router/blog/book'));
-app.use('/blog/discuss', require('./src/router/blog/discuss'));
+/* blog */
+// app.use('/fiction/user', require('./src/router/blog/user'));
+// app.use('/fiction/book', require('./src/router/blog/book'));
+// app.use('/fiction/discuss', require('./src/router/blog/discuss'));
+
 /* fiction router */
+app.use('/fiction', require('./src/router/fiction_qqxs/user'));
+app.use('/fiction', require('./src/router/fiction_qqxs/discuss'));
 app.use('/fiction', require('./src/router/fiction_qqxs/detail'));
 app.use('/fiction', require('./src/router/fiction_qqxs/charplist'));
 app.use('/fiction', require('./src/router/fiction_qqxs/search'));

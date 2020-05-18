@@ -1,7 +1,7 @@
 const Router = require('express').Router()
 const { JSDOM } = require('jsdom');
 const transcode = require('../../assets/transcode');
-Router.get('/categoty', async function (req, res) {
+Router.get('/category', async function (req, res) {
   let type = req.query.typeid || "fenlei1/"
   let page = req.query.page || 1
   let data = await transcode.$transcode(`${type}${page}`)

@@ -1,4 +1,4 @@
-const
+const 
   express = require('express'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
@@ -14,7 +14,6 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
-//这一步操作等同于const passportJwt = require('./src/assets/passport'); passportJwt(passport);
 require('./src/assets/passport')(passport);
 app.use(express.static(join(__dirname, "public")));
 app.use('*', (req, res, next) => {  //设置跨域访问
@@ -25,11 +24,6 @@ app.use('*', (req, res, next) => {  //设置跨域访问
   res.header("Content-Type", "text/html", "application/json;charset=utf-8");
   next();
 });
-/* blog */
-// app.use('/fiction/user', require('./src/router/blog/user'));
-// app.use('/fiction/book', require('./src/router/blog/book'));
-// app.use('/fiction/discuss', require('./src/router/blog/discuss'));
-
 /* fiction router */
 app.use('/fiction', require('./src/router/fiction_qqxs/user'));
 app.use('/fiction', require('./src/router/fiction_qqxs/discuss'));

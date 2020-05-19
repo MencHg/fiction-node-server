@@ -33,7 +33,6 @@ Router.get('/chaplist', async function (req, res) {
 });
 module.exports = Router;
 
-
 function getlist(eles,arr) {
   eles.forEach(item=>{
       let obj_ = {

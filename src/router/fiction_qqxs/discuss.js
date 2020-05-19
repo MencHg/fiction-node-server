@@ -1,30 +1,30 @@
 const Router = require('express').Router();
 const bookdb = require('../../moudle/book');
-Router.get('/detail',(req,res)=>{
+Router.get('/discuss/detail',(req,res)=>{
   let bookId = req.query.id ?  req.query.id : ""
   res.json({
     code:200,
-    book
+    // book
   })
 })
-Router.get('/list',(req,res)=>{
+Router.get('/discuss/list',(req,res)=>{
   res.json({
     code:200,
-    list
+    // list
   })
 })
-Router.post('/add',(req,res)=>{
+Router.post('/discuss/add',(req,res)=>{
   let book = req.body.book
   res.json({
     code:200,
-    list
+    // list
   })
 })
-Router.delete('/remove',(req,res)=>{
+Router.delete('/discuss/remove',(req,res)=>{
   let book = req.query.id
   res.json({
     code:200,
-    list
+    // list
   })
 })
 module.exports = Router

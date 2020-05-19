@@ -2,7 +2,7 @@ const Router = require('express').Router()
 const { JSDOM } = require('jsdom');
 const transcode = require('../../assets/transcode');
 Router.get('/chaplist', async function (req, res) {
-  let htmlDoc = await transcode.$transcode(req.query.id)
+  let htmlDoc = await transcode.$transcode(`xs/${req.query.id}`)
   if (htmlDoc === null) {
     res.json({
       code: 202,

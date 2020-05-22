@@ -2,6 +2,13 @@ const Router = require('express').Router()
 const { JSDOM } = require('jsdom');
 const transcode = require('../../assets/transcode');
 Router.get('/chaplist', async function (req, res) {
+  if(req.query.id === undefined){
+    res.json({
+      code: 202,
+      message: "id 参数出错!~",
+      Error:req.query.id
+    })
+  }
   let htmlDoc = await transcode.$transcode(`xs/${req.query.id}`)
   if (htmlDoc === null) {
     res.json({

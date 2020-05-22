@@ -1,10 +1,9 @@
 const Router = require('express').Router();
+let cryptoKit = require('../../assets/cryptoKit');
 const userdb = require('../../moudle/appid');
 const jwt = require('jsonwebtoken');
 const jwtKey = require('../../assets/jwt').jwtOrKey;
-let cryptoKit = require('../../assets/cryptoKit');
 const passport = require('passport');
-
 Router.get('/userinfo', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({
     code: 200,

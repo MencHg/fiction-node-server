@@ -15,6 +15,8 @@ module.exports = (passpost) => {
                     return done(null,false)
                 }
             })
-            .catch(err=>{res.json(err);})
+            .catch(err=>{
+                console.log(err)
+            })
     }))
 }

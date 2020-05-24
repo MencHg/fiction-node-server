@@ -74,7 +74,7 @@ Router.post('/verify', async function (req, res) {
     if (send === null) {
       res.json({
         message: "发送失败",
-        data: send,
+        data: send.time,
         code: 201
       })
     } else {
@@ -98,24 +98,33 @@ Router.post('/verify', async function (req, res) {
 })
 Router.post('/repassword', async function (req, res) {
   let code = await verifydb.findOne({ email: req.body.email })
-  if (code === req.body.verify) {
-    // 验证成功更新用户密码
-    // let up = 
-    await userdb.updateOne({ password: req.body.password })
-    // let rm = 
-    // 清除已经完成验证的验证码数据
-    await verifydb.deleteMany({ email: req.body.email })
+  if(code === null){
+    console.log(code === null)
     res.json({
-      message: "密码修改成功!~",
-      // data:send.time,
-      code: 200
-    })
-  } else {
-    res.json({
-      message: "验证码不正确或验证码超时!~",
-      // data:send,
+      message: "没有查询到您的验证码记录哟!~",
       code: 201
     })
+  }else{
+    if (code.verify === req.body.verify) {
+      // 验证成功更新用户密码
+      // let up =
+      await userdb.updateOne({ password: cryptoKit(req.body.password) })
+      // 清除已经完成验证的验证码数据
+      await verifydb.deleteMany({ email: req.body.email })
+      res.json({
+        message: "密码修改成功!~",
+        // data:send.time,
+        code: 200
+      })
+    }else{
+      console.log(req.body.verify)
+      res.json({
+        message: "验证码不正确或验证码超时!~",
+        // data:send,
+        code: 201
+      })
+    }
   }
+
 })
 module.exports = Router;

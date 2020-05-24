@@ -8,7 +8,7 @@ function send(email) {
   let emailOption = {
     from:"webmingh@qq.com ",
     to:email,
-    subject:"账号验证码",
+    subject:"<<玉书坊>>账号验证",
     text:"<<玉书坊>>修改密码的验证码",
     html:`
       <h2>嘿 ${ email }!</h2>
@@ -29,7 +29,7 @@ function send(email) {
         .then(result=>{
           resulve(result)
         })
-        .catch(err=>{
+        .catch( err =>{
           reject(null)
         })
     })

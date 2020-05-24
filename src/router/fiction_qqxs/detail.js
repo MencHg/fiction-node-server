@@ -2,8 +2,11 @@ const Router = require('express').Router()
 const {JSDOM} = require('jsdom');
 const transcode = require('../../assets/transcode');
 const passport = require('passport');
-Router.get('/detail',async function(req,res){
-  let data = await transcode.$transcode(`xs/${req.query.id}`)
+const bookrackdb = require('../../moudle/bookrack')
+Router.post('/detail',async function(req,res){
+  console.log(req.body)
+  // console.log(`xs/${req.req.body.id}${req.body.link}`)
+  let data = await transcode.$transcode(`xs/${req.body.id}${req.body.link}`)
   if(data===null){
     // 如果用户传过来的 id 是错误的这里的的他是个 null
     res.json({
@@ -20,8 +23,10 @@ Router.get('/detail',async function(req,res){
     })
   }
 })
-Router.get('/detail', passport.authenticate('jwt', { session: false }), async function(req,res){
-  let data = await transcode.$transcode(`xs/${req.query.id}`)
+Router.post('/detail/bookrack', passport.authenticate('jwt', { session: false }), async function(req,res){
+  console.log(`xs/${req.body.id}${req.body.link}`)
+  let data = await transcode.$transcode(`xs/${req.body.id}${req.body.link}`);
+  await bookrackdb.updateOne({id:req.user._id,bookid:req.body.id},{lately:{id:`${req.body.id}${req.body.link}`,title:"继续上次阅读"}})
   if(data===null){
     // 如果用户传过来的 id 是错误的这里的的他是个 null
     res.json({

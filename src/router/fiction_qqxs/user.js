@@ -50,7 +50,7 @@ Router.post('/register', async function (req, res) {
 
     let isAddStatus = await userdb.create({
       email: req.body.email,
-      password: req.body.email,
+      password: req.body.password,
       "userinfo.nickname": req.body.nickname
     })
     if (isAddStatus._id) {
@@ -108,7 +108,7 @@ Router.post('/repassword', async function (req, res) {
     if (code.verify === req.body.verify) {
       // 验证成功更新用户密码
       // let up =
-      await userdb.updateOne({ password: cryptoKit(req.body.password) })
+      await userdb.updateOne({email:req.body.email},{ password: cryptoKit(req.body.password) })
       // 清除已经完成验证的验证码数据
       await verifydb.deleteMany({ email: req.body.email })
       res.json({

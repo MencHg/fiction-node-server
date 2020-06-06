@@ -7,5 +7,12 @@ module.exports = {
       user:"webmingh@qq.com",
       pass:"wacrtlgqghlabjbe"
     }
+  },
+  wechat:{
+    appId: "wx0e56e6a6021ef79a",
+    appSecret: "f977b1af77898bbb5e3c34eefd7392c7",
+    url:"https://api.weixin.qq.com/sns/jscode2session",
+    accessToken:`https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential`,
+    paidUnionId:"https://api.weixin.qq.com/wxa/getpaidunionid"
   }
 }

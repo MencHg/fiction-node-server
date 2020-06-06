@@ -4,7 +4,7 @@ const
   bodyParser = require('body-parser'),
   { join } = require('path'),
   passport = require('passport'),
-  mongURI = require('./src/assets/config').mongoUri,
+  mongURI = require('./src/assets/config').mongoUri1,
   PORT_ = 9915,
   app = express();
 mongoose
